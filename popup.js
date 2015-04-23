@@ -1,13 +1,22 @@
 function render(friends) {
-  var html = "<table>";
+  var onlines = "";
+  var offlines = "";
+
   for(var i = 0; i < friends.length; i++) {
     var f = friends[i];
 
     var record = "<tr><td>" + f.name +" (" + f.id + ")"
       + "</td><td>" + f.server + ", " + f.area + "</td></tr>";
     html = html + record;
+
+    // オンラインプレイヤーを優先して表示
+    if(f.online) {
+      onlines = onlines + record;
+    } else {
+      offlines = offlines + record;
+    }
   }
-  html = html + "</table>";
+  var html = "<table>" + onlines + offlines + "</table>";
   
   document.querySelector("#onlineFrineds").innerHTML = html;
 }
