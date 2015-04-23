@@ -34,7 +34,7 @@ function render(friends) {
 
 }
 
-function requireLogin() {
+function renderRequireLogin() {
   var html ="ログインしてください";
   document.querySelector("#onlineFrineds").innerHTML = html;
   
@@ -115,7 +115,7 @@ function getWebPcNo(callback) {
   };
   
   xhr.onerror = function(e) {
-    requireLogin();
+    renderRequireLogin();
   };
   xhr.open("GET", "http://hiroba.dqx.jp/sc/home/");
   xhr.responseType = 'document';
