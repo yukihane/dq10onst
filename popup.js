@@ -10,7 +10,7 @@ function render(friends) {
     var f = friends[i];
 
     var record = "<tr class='playerInfo' id='player" + f.webPcNo + "'><td>" + f.name +" (" + f.id + ")"
-      + "</td><td>" + f.area + "</td></tr>";
+      + "</td><td>" + f.area + "</td><td>" + f.memo + "</td></tr>";
     html = html + record;
 
     // オンラインプレイヤーを優先して表示
@@ -78,9 +78,12 @@ function getFriendsByPage(webPcNo, pageNo, results, callback) {
       var server = serverEl.getElementsByTagName("dd")[0].textContent.replace("： ", "");
       var area = serverEl.getElementsByTagName("dd")[1].textContent.replace("： ", "");
       var online = ("--" != server);
+
+      var memo = f.getElementsByClassName("memo")[0].textContent;
+
       
-      console.log(name + ", " + id + ", " + server + ", " + area + ", online: " + online );
-      results.push({name: name, webPcNo: pcNo, id: id, server: server, area: area, online: online});
+      console.log(pcNo +", " + name + ", " + id + ", " + server + ", " + area + ", online: " + online + ", " + memo );
+      results.push({name: name, webPcNo: pcNo, id: id, server: server, area: area, online: online, memo: memo});
     }
     
     var nextLink = xml.querySelector("#contentArea > div > div.bdBox1.myFriendList > div.pageNavi > ul > li.next > a");
