@@ -5,8 +5,8 @@ function render(friends) {
   for(var i = 0; i < friends.length; i++) {
     var f = friends[i];
 
-    var record = "<tr><td>" + f.name +" (" + f.id + ")"
-      + "</td><td>" + f.server + ", " + f.area + "</td></tr>";
+    var record = "<tr class='playerInfo' id='player" + f.webPcNo + "'><td>" + f.name +" (" + f.id + ")"
+      + "</td><td>" + f.area + "</td></tr>";
     html = html + record;
 
     // オンラインプレイヤーを優先して表示
@@ -19,6 +19,19 @@ function render(friends) {
   var html = "<table>" + onlines + offlines + "</table>";
   
   document.querySelector("#onlineFrineds").innerHTML = html;
+
+  var reWebPcNo = /player(\d+)/;
+  var jumpPage = function(){
+    var no = reWebPcNo.exec(this.id)[1];
+    chrome.tabs.create({'url': "http://hiroba.dqx.jp/sc/character/" + no});
+  };
+
+  var trs = document.querySelectorAll(".playerInfo");
+  for(var j=0; j<trs.length; j++) {
+    var tr = trs[j];
+    tr.onclick = jumpPage;
+  }
+
 }
 
 function requireLogin() {
@@ -37,6 +50,7 @@ function getFriendsByPage(webPcNo, pageNo, results, callback) {
     var friends = xml.querySelectorAll("#contentArea > div > div.bdBox1.myFriendList > div.article");
     
     var reId = /([A-Z][A-Z]\d\d\d-\d\d\d)/;
+    var reWebPcNo = /character\/(\d+)/;
     for(var i = 0; i < friends.length; i++) {
       var f = friends[i];
 
@@ -46,6 +60,7 @@ function getFriendsByPage(webPcNo, pageNo, results, callback) {
         .getElementsByTagName("dl")[0];
       
       var name = el.getElementsByTagName("dd")[0].getElementsByTagName("a")[0].textContent;
+      var pcNo = reWebPcNo.exec(el.getElementsByTagName("dd")[0].getElementsByTagName("a")[0].href)[1];
       var id = reId.exec(el.getElementsByTagName("dd")[1].textContent)[1];
 
       var serverEl = f.getElementsByTagName("div")[0]
@@ -57,7 +72,7 @@ function getFriendsByPage(webPcNo, pageNo, results, callback) {
       var online = ("--" != server);
       
       console.log(name + ", " + id + ", " + server + ", " + area + ", online: " + online );
-      results.push({name: name, id: id, server: server, area: area, online: online});
+      results.push({name: name, webPcNo: pcNo, id: id, server: server, area: area, online: online});
     }
     
     var nextLink = xml.querySelector("#contentArea > div > div.bdBox1.myFriendList > div.pageNavi > ul > li.next > a");

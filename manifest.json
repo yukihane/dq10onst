@@ -27,6 +27,7 @@
   },
   "permissions": [
     "declarativeContent",
+    "tabs",
     "http://hiroba.dqx.jp/"
   ]
 }
