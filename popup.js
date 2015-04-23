@@ -2,9 +2,6 @@ function render(friends) {
   var html = "<table>";
   for(var i = 0; i < friends.length; i++) {
     var f = friends[i];
-    if(!f.online) {
-      continue;
-    }
 
     var record = "<tr><td>" + f.name +" (" + f.id + ")"
       + "</td><td>" + f.server + ", " + f.area + "</td></tr>";
