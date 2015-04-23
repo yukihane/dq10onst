@@ -9,7 +9,8 @@ function render(friends) {
   for(var i = 0; i < friends.length; i++) {
     var f = friends[i];
 
-    var record = "<tr class='playerInfo' id='player" + f.webPcNo + "'><td>" + f.name +" (" + f.id + ")"
+    var record = "<tr class='playerInfo " + (f.online ? "online" : "offline")
+      +"' id='player" + f.webPcNo + "'><td>" + f.name +" (" + f.id + ")"
       + "</td><td>" + f.area + "</td><td>" + f.memo + "</td></tr>";
     html = html + record;
 
