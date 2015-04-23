@@ -44,8 +44,11 @@ function getFriendsByPage(webPcNo, pageNo, results, callback) {
   var xhr = new XMLHttpRequest();
   
   xhr.onload = function() {
-    console.log(xhr.status);
-    
+    if(xhr.status != 200) {
+      console.log("status is abnormal: " + xhr.status);
+      return;
+    }
+
     var xml = xhr.responseXML;
     var friends = xml.querySelectorAll("#contentArea > div > div.bdBox1.myFriendList > div.article");
     
@@ -54,6 +57,7 @@ function getFriendsByPage(webPcNo, pageNo, results, callback) {
     for(var i = 0; i < friends.length; i++) {
       var f = friends[i];
 
+      // class='article' のdivエレメント
       var el = f.getElementsByTagName("div")[0]
         .getElementsByTagName("div")[0]
         .getElementsByTagName("div")[0]
@@ -97,8 +101,11 @@ function getFriends(webPcNo, callback) {
 function getWebPcNo(callback) {
   var xhr = new XMLHttpRequest();
   xhr.onload = function(){
-    console.log(xhr.status);
-    
+    if(xhr.status != 200) {
+      console.log("status is abnormal: " + xhr.status);
+      return;
+    }
+
     var xml = xhr.responseXML;
     var link = xml.getElementById("mypageNavi")
       .getElementsByTagName("div")[0]
