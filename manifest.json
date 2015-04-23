@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+
+  "name": "DQX フレンドオンラインステータス",
+  "short_name": "dq10onst",
+  "description": "目覚めし冒険者の広場からフレンドのオンライン状態ををピックアップ表示します。",
+  "version": "1.0",
+  "minimum_chrome_version": "38",
+
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+
+  "background" : {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+
+  "page_action": {
+    "default_icon": {
+      "19": "icons/icon19.png",
+      "38": "icons/icon38.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "declarativeContent",
+    "tabs",
+    "http://hiroba.dqx.jp/"
+  ]
+}
