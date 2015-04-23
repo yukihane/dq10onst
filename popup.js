@@ -1,3 +1,7 @@
+// デバッグログ出力無効化
+var console = {};
+console.log = function(){};
+
 function render(friends) {
   var onlines = "";
   var offlines = "";
