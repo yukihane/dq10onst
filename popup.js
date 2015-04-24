@@ -130,6 +130,8 @@ function getWebPcNo(callback) {
   };
   
   xhr.onerror = function(e) {
+    // 未ログインの場合はsquare-enix.comドメインへリダイレクトされる
+    // そのためCSP違反のエラーが発生して本処理が実行される
     renderRequireLogin();
   };
   xhr.open("GET", "http://hiroba.dqx.jp/sc/home/");
