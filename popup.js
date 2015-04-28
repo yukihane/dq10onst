@@ -9,7 +9,8 @@ function render(friends) {
     var record = "<tr class='playerInfo " + (f.online ? "online" : "offline") +"'>" 
       + "<td class='playerName' id='player" + f.webPcNo + "'>" + f.name +" (" + f.id + ")</td>" 
       + "<td>" + (f.published ? f.area : "(非公開)") + "</td>"
-      + "<td>" + (f.published ? f.memo : "(非公開)") + "</td></tr>";
+      + "<td class='playerMemo' title='クリックでピラミッド状況' id='memo" + f.webPcNo
+      + "'>" + (f.published ? f.memo : "(非公開)") + "</td></tr>";
     html = html + record;
 
     // オンラインプレイヤーを優先して表示
@@ -35,6 +36,48 @@ function render(friends) {
     tr.onclick = jumpPage;
   }
 
+  var reMemoWebPcNo = /memo(\d+)/;
+  var queryPyramid = function(){
+    var cell = this;
+    var no = reMemoWebPcNo.exec(this.id)[1];
+    var url = "http://hiroba.dqx.jp/sc/character/" + no;
+
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+      if(xhr.status != 200) {
+        console.log("status is abnormal: " + xhr.status);
+        return;
+      }
+        
+  
+      var xml = xhr.responseXML;
+      var imgs = xml.querySelectorAll("#statusArea > div.pyramid > ul > li > img");
+      console.log(imgs);
+      if(imgs.length === 0){
+        cell.innerText = "(取得できませんでした)";
+      } else {
+        var unachieveds = ["\u2460", "\u2461", "\u2462", "\u2463", "\u2464",
+          "\u2465", "\u2466", "\u2467", "\u2468"];
+        var reUn = /unachieved(\d+)/;
+        var result = "";
+        for(var m = 0; m < imgs.length; m++){
+          result = result + (reUn.test(imgs[m].src) ? unachieveds[m] : "●");
+        }
+        console.log("result: " + result + ", this: " + cell);
+        cell.innerText = result;
+      }
+    };
+  
+    xhr.open("GET", url);
+    xhr.responseType = "document";
+    xhr.send();
+  };
+
+  var memos = document.querySelectorAll(".playerMemo");
+  for(var k=0; k<memos.length; k++) {
+    var memo = memos[k];
+    memo.onclick = queryPyramid;
+  }
 }
 
 function renderRequireLogin() {
