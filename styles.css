@@ -3,6 +3,16 @@ body {
   max-height: 600px;
 }
 
+table {
+  border-collapse: collapse;
+}
+
+table td {
+  border-width: 1px 0px;
+  border-color: #000000;
+  border-style: solid;
+}
+
 #onlineFrineds {
   overflow-y: scroll;
   max-height: 400px;
@@ -10,4 +20,14 @@ body {
 
 tr.online {
   background-color: yellow;
+}
+
+.playerName {
+  font-weight: bold;
+  color: navy;
+  cursor: pointer;
+}
+
+.playerMemo {
+  cursor: pointer;
 }
