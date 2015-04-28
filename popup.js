@@ -6,9 +6,8 @@ function render(friends) {
   for(var i = 0; i < friends.length; i++) {
     var f = friends[i];
 
-    var record = "<tr class='playerInfo " + (f.online ? "online" : "offline")
-      +"' id='player" + f.webPcNo + "'>" 
-      + "<td class='playerName'>" + f.name +" (" + f.id + ")</td>" 
+    var record = "<tr class='playerInfo " + (f.online ? "online" : "offline") +"'>" 
+      + "<td class='playerName' id='player" + f.webPcNo + "'>" + f.name +" (" + f.id + ")</td>" 
       + "<td>" + (f.published ? f.area : "(非公開)") + "</td>"
       + "<td>" + (f.published ? f.memo : "(非公開)") + "</td></tr>";
     html = html + record;
@@ -30,7 +29,7 @@ function render(friends) {
     chrome.tabs.create({'url': "http://hiroba.dqx.jp/sc/character/" + no});
   };
 
-  var trs = document.querySelectorAll(".playerInfo");
+  var trs = document.querySelectorAll(".playerName");
   for(var j=0; j<trs.length; j++) {
     var tr = trs[j];
     tr.onclick = jumpPage;
