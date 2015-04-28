@@ -36,6 +36,7 @@ function render(friends) {
     tr.onclick = jumpPage;
   }
 
+  // ピラミッド状況取得処理
   var reMemoWebPcNo = /memo(\d+)/;
   var queryPyramid = function(){
     var cell = this;
@@ -54,7 +55,12 @@ function render(friends) {
       var imgs = xml.querySelectorAll("#statusArea > div.pyramid > ul > li > img");
       console.log(imgs);
       if(imgs.length === 0){
-        cell.innerText = "(取得できませんでした)";
+        var noclear = xml.querySelector("#statusArea > div.pyramid > p");
+        if(noclear && noclear.className === "img_noclear") {
+          cell.innerText = "(まだ一度も探索していません)";
+        } else {
+          cell.innerText = "(取得できませんでした)";
+        }
       } else {
         var unachieveds = ["\u2460", "\u2461", "\u2462", "\u2463", "\u2464",
           "\u2465", "\u2466", "\u2467", "\u2468"];
