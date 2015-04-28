@@ -7,9 +7,8 @@ function render(friends) {
     var f = friends[i];
 
     var record = "<tr class='playerInfo " + (f.online ? "online" : "offline")
-      +"' id='player" + f.webPcNo + "'><td>" + f.name +" (" + f.id + ")"
-      + "</td><td>" + (f.published ? f.area : "(非公開)") + "</td><td>"
-      + (f.published ? f.memo : "(非公開)") + "</td></tr>";
+      +"' id='player" + f.webPcNo + "'><td class='playerName'>" + f.name +" (" + f.id + ")"
+      + "</td><td>" + (f.published ? f.area : "(非公開)") + "</td><td>" + (f.published ? f.memo : "(非公開)") + "</td></tr>";
     html = html + record;
 
     // オンラインプレイヤーを優先して表示

@@ -11,3 +11,9 @@ body {
 tr.online {
   background-color: yellow;
 }
+
+.playerName {
+  font-weight: bold;
+  color: navy;
+  cursor: pointer;
+}
