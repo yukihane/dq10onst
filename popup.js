@@ -1,6 +1,3 @@
-// デバッグログ出力無効化
-var console = {};
-console.log = function(){};
 
 function render(friends) {
   var onlines = "";
@@ -11,7 +8,8 @@ function render(friends) {
 
     var record = "<tr class='playerInfo " + (f.online ? "online" : "offline")
       +"' id='player" + f.webPcNo + "'><td>" + f.name +" (" + f.id + ")"
-      + "</td><td>" + f.area + "</td><td>" + f.memo + "</td></tr>";
+      + "</td><td>" + (f.published ? f.area : "(非公開)") + "</td><td>"
+      + (f.published ? f.memo : "(非公開)") + "</td></tr>";
     html = html + record;
 
     // オンラインプレイヤーを優先して表示
@@ -71,6 +69,8 @@ function getFriendsByPage(webPcNo, pageNo, results, callback) {
       var name = el.getElementsByTagName("dd")[0].getElementsByTagName("a")[0].textContent;
       var pcNo = reWebPcNo.exec(el.getElementsByTagName("dd")[0].getElementsByTagName("a")[0].href)[1];
       var id = reId.exec(el.getElementsByTagName("dd")[1].textContent)[1];
+      var job =  el.getElementsByTagName("dd")[2].textContent;
+      var published = (job !== "： --");
 
       var serverEl = f.getElementsByTagName("div")[0]
         .getElementsByTagName("div")[0]
@@ -84,7 +84,7 @@ function getFriendsByPage(webPcNo, pageNo, results, callback) {
 
       
       console.log(pcNo +", " + name + ", " + id + ", " + server + ", " + area + ", online: " + online + ", " + memo );
-      results.push({name: name, webPcNo: pcNo, id: id, server: server, area: area, online: online, memo: memo});
+      results.push({name: name, webPcNo: pcNo, id: id, published: published, server: server, area: area, online: online, memo: memo});
     }
     
     var nextLink = xml.querySelector("#contentArea > div > div.bdBox1.myFriendList > div.pageNavi > ul > li.next > a");
