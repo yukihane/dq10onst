@@ -17,3 +17,7 @@ tr.online {
   color: navy;
   cursor: pointer;
 }
+
+.playerMemo {
+  cursor: pointer;
+}
