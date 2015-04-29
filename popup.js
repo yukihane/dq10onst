@@ -167,6 +167,9 @@ function getWebPcNo(callback) {
     }
 
     var xml = xhr.responseXML;
+
+    // FIXME メンテナンス中はページが書き換わるのでこの取り方だとまずい
+    // getElementById("mypageNavi") がnullになるので例外発生
     var link = xml.getElementById("mypageNavi")
       .getElementsByTagName("div")[0]
       .getElementsByTagName("ul")[0]
