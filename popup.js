@@ -167,13 +167,15 @@ function getWebPcNo(callback) {
     }
 
     var xml = xhr.responseXML;
-    var link = xml.getElementById("mypageNavi")
-      .getElementsByTagName("div")[0]
-      .getElementsByTagName("ul")[0]
-      .getElementsByTagName("li")[1]
-      .getElementsByTagName("a")[0]
-      .href;
-    var res = /\/diary\/(\d+)/.exec(link)[1];
+
+    // フレンドリストへのリンクを取得しそのURLからWebPcNoを読み取る
+    var a = xml.querySelector("li.navi_friendlist > a");
+    if(!a) {
+      // メンテナス中は異なるページ構造が返されるので取得不可
+      throw new Error();
+    }
+    var link = a.href;
+    var res = /\/character\/(\d+)/.exec(link)[1];
 
     if(!res) {
       throw new Error();

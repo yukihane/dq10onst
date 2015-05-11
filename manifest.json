@@ -4,7 +4,7 @@
   "name": "DQX フレンドオンラインステータス",
   "short_name": "dq10onst",
   "description": "目覚めし冒険者の広場からフレンドのオンライン状態ををピックアップ表示します。",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "minimum_chrome_version": "38",
 
   "icons": {
