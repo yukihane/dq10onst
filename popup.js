@@ -89,9 +89,8 @@ function render(friends) {
   }
 }
 
-function renderRequireLogin() {
-  var html ="ログインしてください";
-  document.querySelector("#onlineFrineds").innerHTML = html;
+function renderError(msg) {
+  document.querySelector("#onlineFrineds").innerHTML = msg;
   
 }
 
@@ -172,13 +171,15 @@ function getWebPcNo(callback) {
     var a = xml.querySelector("li.navi_friendlist > a");
     if(!a) {
       // メンテナス中は異なるページ構造が返されるので取得不可
-      throw new Error();
+      renderError("取得に失敗しました(ER1)");
+      return;
     }
     var link = a.href;
     var res = /\/character\/(\d+)/.exec(link)[1];
 
     if(!res) {
-      throw new Error();
+      renderError("取得に失敗しました(ER2)");
+      return;
     }
     callback(res);
   };
@@ -186,7 +187,7 @@ function getWebPcNo(callback) {
   xhr.onerror = function(e) {
     // 未ログインの場合はsquare-enix.comドメインへリダイレクトされる
     // そのためCSP違反のエラーが発生して本処理が実行される
-    renderRequireLogin();
+    renderError("ログインしてください");
   };
   xhr.open("GET", "http://hiroba.dqx.jp/sc/home/");
   xhr.responseType = 'document';
