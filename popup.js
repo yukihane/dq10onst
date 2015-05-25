@@ -4,12 +4,13 @@ console.log = function(){};
 
 function render(friends) {
   var onlines = "";
+  var hiddens = "";
   var offlines = "";
 
   for(var i = 0; i < friends.length; i++) {
     var f = friends[i];
 
-    var record = "<tr class='playerInfo " + (f.online ? "online" : "offline") +"'>" 
+    var record = "<tr class='playerInfo " + f.online +"'>"
       + "<td class='playerName' id='player" + f.webPcNo + "'>" + f.name +" (" + f.id + ")</td>" 
       + "<td>" + (f.published ? f.area : "(非公開)") + "</td>"
       + "<td class='playerMemo' title='クリックでピラミッド状況' id='memo" + f.webPcNo
@@ -17,13 +18,15 @@ function render(friends) {
     html = html + record;
 
     // オンラインプレイヤーを優先して表示
-    if(f.online) {
+    if(f.online === "online") {
       onlines = onlines + record;
+    } else if (f.online === "hidden") {
+      hiddens = hiddens + record;
     } else {
       offlines = offlines + record;
     }
   }
-  var html = "<table>" + onlines + offlines + "</table>";
+  var html = "<table>" + onlines + hiddens + offlines + "</table>";
   
   document.querySelector("#onlineFrineds").innerHTML = html;
 
@@ -129,7 +132,7 @@ function getFriendsByPage(webPcNo, pageNo, results, callback) {
 
       var server = serverEl.getElementsByTagName("dd")[0].textContent.replace("： ", "");
       var area = serverEl.getElementsByTagName("dd")[1].textContent.replace("： ", "");
-      var online = ("--" != server);
+      var online = ("--" === server ? "offline" : ("非表示設定中" === server ? "hidden" : "online"));
 
       var memo = f.getElementsByClassName("memo")[0].textContent;
 
