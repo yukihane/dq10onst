@@ -28,6 +28,6 @@
   "permissions": [
     "declarativeContent",
     "tabs",
-    "http://hiroba.dqx.jp/"
+    "https://hiroba.dqx.jp/"
   ]
 }

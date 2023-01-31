@@ -33,7 +33,7 @@ function render(friends) {
   var reWebPcNo = /player(\d+)/;
   var jumpPage = function(){
     var no = reWebPcNo.exec(this.id)[1];
-    chrome.tabs.create({'url': "http://hiroba.dqx.jp/sc/character/" + no});
+    chrome.tabs.create({'url': "https://hiroba.dqx.jp/sc/character/" + no});
   };
 
   var trs = document.querySelectorAll(".playerName");
@@ -47,7 +47,7 @@ function render(friends) {
   var queryPyramid = function(){
     var cell = this;
     var no = reMemoWebPcNo.exec(this.id)[1];
-    var url = "http://hiroba.dqx.jp/sc/character/" + no;
+    var url = "https://hiroba.dqx.jp/sc/character/" + no;
 
     var xhr = new XMLHttpRequest();
     xhr.onload = function() {
@@ -151,7 +151,7 @@ function getFriendsByPage(webPcNo, pageNo, results, callback) {
     }
   };
   
-  xhr.open("GET", "http://hiroba.dqx.jp/sc/character/" + webPcNo + "/friendlist/page/" + pageNo);
+  xhr.open("GET", "https://hiroba.dqx.jp/sc/character/" + webPcNo + "/friendlist/page/" + pageNo);
   xhr.responseType = "document";
   xhr.send();
 }
@@ -192,7 +192,7 @@ function getWebPcNo(callback) {
     // そのためCSP違反のエラーが発生して本処理が実行される
     renderError("ログインしてください");
   };
-  xhr.open("GET", "http://hiroba.dqx.jp/sc/home/");
+  xhr.open("GET", "https://hiroba.dqx.jp/sc/home/");
   xhr.responseType = 'document';
   xhr.send();
 }
