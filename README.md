@@ -1,4 +1,3 @@
-ドラゴンクエスト10プレイヤー専用サイト[目覚めし冒険者の広場](http://hiroba.dqx.jp/sc/)のフレンドリストを1ページにまとめて表示するGoogle Chrome Extension です.
+ドラゴンクエスト 10 プレイヤー専用サイト[目覚めし冒険者の広場](http://hiroba.dqx.jp/sc/)のフレンドリストを 1 ページにまとめて表示する Google Chrome Extension です.
 
-Chromeウェブストア - [DQX フレンドオンラインステータス](https://chrome.google.com/webstore/detail/jdpablepjdinddfjjfffhbngkpdjcocn/)からダウンロード, インストールできます.
-
+~~Chrome ウェブストア - [DQX フレンドオンラインステータス](https://chrome.google.com/webstore/detail/jdpablepjdinddfjjfffhbngkpdjcocn/)からダウンロード, インストールできます.~~
