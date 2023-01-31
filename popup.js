@@ -174,7 +174,7 @@ function getFriendsByPage(webPcNo, pageNo, results, callback) {
           ? "hidden"
           : "online";
 
-      var memo = f.getElementsByClassName("memo")[0].textContent;
+      var memo = f.getElementsByClassName("kakioki-memo-inner")[0].textContent;
 
       console.log(
         pcNo +
@@ -241,7 +241,7 @@ function getWebPcNo(callback) {
     var xml = xhr.responseXML;
 
     // フレンドリストへのリンクを取得しそのURLからWebPcNoを読み取る
-    var a = xml.querySelector("li.navi_friendlist > a");
+    var a = xml.querySelector("#sub-navi-friendlist > a");
     if (!a) {
       // メンテナス中は異なるページ構造が返されるので取得不可
       renderError("取得に失敗しました(ER1)");
